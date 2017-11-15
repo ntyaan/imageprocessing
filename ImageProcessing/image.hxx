@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <vector>
+
 template <class T>
 class Array3{
 private:
