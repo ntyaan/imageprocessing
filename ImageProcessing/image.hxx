@@ -8,9 +8,9 @@
 template <class T>
 class Array3{
 private:
-  std::vector<std::vector<unsigned char> > org_image_gray;
-  std::vector<std::vector<unsigned char> > image_gray;
-  std::vector<std::vector<unsigned char> > tmp_image;
+  std::vector<std::vector<T> > org_image_gray;
+  std::vector<std::vector<T> > image_gray;
+  std::vector<std::vector<T> > tmp_image;
   int SEEK;
   int ROW, COL, DEPTH;
 public:
@@ -81,7 +81,7 @@ public:
     double gray_var[3]={0.2126, 0.7152, 0.0722};
     for(int i=0;i<ROW;i++){
       for(int j=0;j<COL;j++){
-	unsigned char tmp;
+        T tmp;
 	int var=0;
 	for(int k=0;k<DEPTH;k++){
 	  ifs.read(reinterpret_cast<char*>(&tmp), 1);
@@ -157,7 +157,7 @@ public:
   void simple_black_or_whote(){
     for(int i=0;i<ROW;i++){ 
       for(int j=0;j<COL;j++){
-	unsigned char tmp;
+        T tmp;
 	if(image_gray[i][j]>0x80)
 	  tmp=0xff;
 	else
@@ -388,14 +388,14 @@ public:
       for(int j=1;j<COL-1;j++){
 	//クイックソート
 	int left=0, right=8, z=0;
-	unsigned char tmp[9];
+        T tmp[9];
 	for(int x=i-1;x<i-1+3;x++){
 	  for(int y=j-1;y<j-1+3;y++){
 	    tmp[z]=org_image_gray[x][y];
 	    z++;
 	  }
 	}
-	unsigned char pivot=tmp[4];
+        T pivot=tmp[4];
 	while(1){
 	  while(tmp[left]<pivot)
 	    left++;
@@ -403,7 +403,7 @@ public:
 	    right--;
 	  if(left>=right)
 	    break;
-	  unsigned char temp;
+	  T temp;
 	  temp=tmp[left];
 	  tmp[left]=tmp[right];
 	  tmp[right]=temp;
@@ -589,5 +589,3 @@ void get_info(std::string filename, int &seek, int &row, int &col){
   ifs.close();
   return;
 }
-
-
