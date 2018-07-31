@@ -2,12 +2,15 @@
 授業の課題で出されたのでメモ．
 jpgとかpngとか扱いたかったけどOpenCV等の画像処理ライブラリを使うなとのことで諦めて簡単そうなppmを用いた．
 (環境:ubuntu16.04 g++ version5.4.0)
-##ppmの中身
+
+## ppmの中身
+
 画像処理で有名な[Lenna.png](https://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png)をImageMagickでppmに変換し使用する．
 
 ```bash
 ~$ convert Lenna.png Lenna.ppm
 ```
+
 emacsのhexl-find-fileでバイナリデータを確認．
 
 ```bash
@@ -21,14 +24,21 @@ Filename /Lenna.ppm
 00000020: 74e4 8a7b e386 7ce3 8c7f e188 77e4 877e  t..{..|.....w..~
 ...
 ```
+
 1行目の0x50[p], 0x36[6]がマジックナンバー．
+
 1つ目の0x0aの後0x35[5], 0x31[1], 0x32[2]が画像の幅．
+
 0x20を挟んで0x35[5], 0x31[1], 0x32[2]が画像の高さ．
+
 2つ目の0x0aのから3つ目の0x0aまでフルカラーの255を示す0x32[2], 0x35[5], 0x35[5]．
+
 3つ目の0x0aからデータ部分．
+
 この画像にはないがコメントがある場合は1つ目の0x0aの後0x23[#]から次の0x0aまでコメントが入る．
 
-##画像を読み込んでみる
+## 画像を読み込んでみる
+
 取り敢えず3次元配列用意してifstreamでreadすればいっかってことで最初はこんなの
 
 ```cpp
@@ -61,7 +71,8 @@ int main(void){
 
 でもせっかくファイルの最初の行に画像の情報あるのにいちいちピクセル数とseekする位置を指定するの面倒だなってことで書き換えた．
 
-```cpp:
+
+```cpp
 constexpr int RGB = 3;
 std::string filename = "Lenna.ppm";
 
@@ -96,9 +107,11 @@ int main(void){
     return 0;  
 }
 ```
+
 関数[get_info](https://github.com/ntyaan/imageprocessing/blob/master/ImageProcessing/get_info.cxx)はもっとスマートに書ける気がするけど動いたからまぁいいや．
 
-##画像を出力してみる
+## 画像を出力してみ
+
 3次元配列は無駄に感じたので2次元配列にしてグレースケール化された情報のみ格納する．
 
 ```cpp
