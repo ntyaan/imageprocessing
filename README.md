@@ -5,7 +5,7 @@ jpgとかpngとか扱いたかったけどOpenCV等の画像処理ライブラ�
 
 ## ppmの中身
 
-画像処理で有名な[Lenna.png](https://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png)をImageMagickでppmに変換し使用する．
+画像処理で有名な[Lenna.png](http://optipng.sourceforge.net/pngtech/img/lena.html)をImageMagickでppmに変換し使用する．
 
 ```bash
 ~$ convert Lenna.png Lenna.ppm
@@ -175,7 +175,8 @@ int main(void){
 |:--|:--|
 |![Lenna.png](https://qiita-image-store.s3.amazonaws.com/0/134663/6b9c2cf7-5291-8159-c73c-e892bb7e218d.png)|![grayscale_Lenna.jpg](https://qiita-image-store.s3.amazonaws.com/0/134663/33ee521c-02e2-0559-8dfc-376ecbcb07b9.jpeg)|
 
-###クラスにしてみる
+### クラスにしてみる
+
 [https://github.com/ntyaan/imageprocessing/blob/master/ImageProcessing/image.hxx](https://github.com/ntyaan/imageprocessing/blob/master/ImageProcessing/image.hxx)
 [https://github.com/ntyaan/imageprocessing/blob/master/ImageProcessing/main.cxx](https://github.com/ntyaan/imageprocessing/blob/master/ImageProcessing/main.cxx)
 
